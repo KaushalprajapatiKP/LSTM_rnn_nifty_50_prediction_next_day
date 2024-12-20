@@ -100,8 +100,8 @@ st.markdown(
 st.markdown(
     """
     This Project is made by Kaushal Prajapati\n
-    Github profile : https://github.com/KaushalprajapatiKP
-    Linkdien : www.linkedin.com/in/kaushal-prajapati-110a2a212
-    Email : kaushalprajapati5296@gmail.com
+    Github profile : https://github.com/KaushalprajapatiKP\n
+    Linkdien : www.linkedin.com/in/kaushal-prajapati-110a2a212\n
+    Email : kaushalprajapati5296@gmail.com\n
     """
 )
