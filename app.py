@@ -97,6 +97,9 @@ st.markdown(
     For more information, contact [support@example.com](mailto:support@example.com).
     """
 )
+st.divider()
+st.divider()
+st.divider()
 st.markdown(
     """
     This Project is made by Kaushal Prajapati\n
