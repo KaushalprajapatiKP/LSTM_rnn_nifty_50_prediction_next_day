@@ -77,7 +77,7 @@ if st.button("🚀 Predict Now"):
         col3.metric(
             label="Predicted %Change",
             value=f"{percent_change:.2f}%",
-            delta_color=color
+            delta_color='inverse'
         )
         
         # Historical Data Visualization
