@@ -35,7 +35,7 @@ def prepare_input(data, lookback=60):
 def predict_next_day():
     historical_data = load_historical_data()
     cols = ['Open', 'High', 'Low', 'Close', '%Change'] 
-    input_data = historical_data[cols].tail(120) 
+    input_data = historical_data[cols].tail(1000) 
     X = prepare_input(input_data)
     prediction = model.predict(X)
     prediction_rescaled = scaler.inverse_transform(
