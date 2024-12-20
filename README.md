@@ -11,16 +11,16 @@ The goal of this project is to use machine learning techniques, specifically LST
 ## Data Preprocessing
 The data used in this project is from the Nifty 50 index. The preprocessing steps include:
 
-## Downloading the historical stock price data.
-## Normalizing the data using MinMaxScaler.
-## Splitting the data into training and testing sets.
-## Model Architecture
-#### The LSTM model is built with the following architecture:
-#### Input Layer: Takes in the preprocessed stock price data.
-#### LSTM Layer: The core of the model, where the sequential data is processed.
-#### Dense Layer: A fully connected layer that outputs the predicted stock price.
-#### Training the Model
-#### Once the data is preprocessed, the LSTM model is trained using the training dataset. The model is then evaluated using the testing dataset.
+1. Downloading the historical stock price data.
+2. Normalizing the data using MinMaxScaler.
+3. Splitting the data into training and testing sets.
+4. Model Architecture
+   * The LSTM model is built with the following architecture:
+   * Input Layer: Takes in the preprocessed stock price data.
+   * LSTM Layer: The core of the model, where the sequential data is processed.
+   * Dense Layer: A fully connected layer that outputs the predicted stock price.
+5. Training the Model
+6. Once the data is preprocessed, the LSTM model is trained using the training dataset. The model is then evaluated using the testing dataset.
 
 ## Making Predictions
 After training, the model can be used to make predictions on the next day's stock price.
