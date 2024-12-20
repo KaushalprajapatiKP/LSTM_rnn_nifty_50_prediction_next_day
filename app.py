@@ -83,14 +83,34 @@ if st.button("🚀 Predict Now"):
         # Historical Data Visualization
         st.subheader("📉 Historical Data & Prediction")
         historical_data = load_historical_data()
-        plt.figure(figsize=(10, 6))
-        plt.plot(historical_data['Close'].tail(120), label='Historical Close Prices', color='blue')
-        plt.axhline(prediction['Predicted_Close'], color='orange', linestyle='--', label='Predicted Close')
-        plt.title("Historical Close Prices with Prediction")
-        plt.xlabel("Days")
-        plt.ylabel("Price")
-        plt.legend()
-        st.pyplot(plt)
+        
+        # Prepare actual vs predicted data
+        actual_open = historical_data['Open'].tail(120).values
+        actual_close = historical_data['Close'].tail(120).values
+        predicted_open = np.array([prediction['Predicted_Open']] * len(actual_open))
+        predicted_close = np.array([prediction['Predicted_Close']] * len(actual_close))
+        
+        # Create two parallel plots for Open and Close
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+        # Plot for Open
+        ax1.plot(actual_open, label='Actual Open', color='blue')
+        ax1.plot(predicted_open, label='Predicted Open', color='orange', linestyle='--')
+        ax1.set_title("Actual vs Predicted Open")
+        ax1.set_xlabel("Days")
+        ax1.set_ylabel("Price")
+        ax1.legend()
+
+        # Plot for Close
+        ax2.plot(actual_close, label='Actual Close', color='green')
+        ax2.plot(predicted_close, label='Predicted Close', color='red', linestyle='--')
+        ax2.set_title("Actual vs Predicted Close")
+        ax2.set_xlabel("Days")
+        ax2.set_ylabel("Price")
+        ax2.legend()
+
+        # Show the plots
+        st.pyplot(fig)
 
     except Exception as e:
         st.error(f"Error during prediction: {e}")
