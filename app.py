@@ -4,6 +4,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
 import pickle
+import matplotlib.pyplot as plt
 
 # Load scaler
 with open('scaler.pkl', 'rb') as file:
@@ -25,16 +26,6 @@ def load_historical_data():
 
 # Prepare input data
 def prepare_input(data, lookback=60):
-    """
-    Prepares input data for prediction.
-
-    Parameters:
-        data (pd.DataFrame): Historical data containing features.
-        lookback (int): Number of past days to consider for prediction.
-
-    Returns:
-        np.array: Prepared data for the model.
-    """
     data_scaled = scaler.transform(data)
     X = []
     X.append(data_scaled[-lookback:, :])  
@@ -42,12 +33,6 @@ def prepare_input(data, lookback=60):
 
 # Predict function
 def predict_next_day():
-    """
-    Predict the next day's Open, Close, and %Change.
-
-    Returns:
-        dict: Predicted values.
-    """
     historical_data = load_historical_data()
     cols = ['Open', 'High', 'Low', 'Close', '%Change'] 
     input_data = historical_data[cols].tail(120) 
@@ -82,14 +67,35 @@ if st.button("🚀 Predict Now"):
         with st.spinner("Calculating predictions..."):
             prediction = predict_next_day()
         st.success("Prediction successful! 🎉")
-        st.subheader("📈 Predicted Values:")
-        st.metric(label="Predicted Open", value=f"{prediction['Predicted_Open']:.2f}")
-        st.metric(label="Predicted Close", value=f"{prediction['Predicted_Close']:.2f}")
-        st.metric(label="Predicted %Change", value=f"{(((prediction['Predicted_Close']-prediction['Predicted_Open'])/prediction['Predicted_Open'])*100):.2f}%")
+        
+        # Display metrics in columns
+        col1, col2, col3 = st.columns(3)
+        col1.metric(label="Predicted Open", value=f"{prediction['Predicted_Open']:.2f}")
+        col2.metric(label="Predicted Close", value=f"{prediction['Predicted_Close']:.2f}")
+        percent_change = ((prediction['Predicted_Close'] - prediction['Predicted_Open']) / prediction['Predicted_Open']) * 100
+        color = "green" if percent_change > 0 else "red"
+        col3.metric(
+            label="Predicted %Change",
+            value=f"{percent_change:.2f}%",
+            delta_color=color
+        )
+        
+        # Historical Data Visualization
+        st.subheader("📉 Historical Data & Prediction")
+        historical_data = load_historical_data()
+        plt.figure(figsize=(10, 6))
+        plt.plot(historical_data['Close'].tail(120), label='Historical Close Prices', color='blue')
+        plt.axhline(prediction['Predicted_Close'], color='orange', linestyle='--', label='Predicted Close')
+        plt.title("Historical Close Prices with Prediction")
+        plt.xlabel("Days")
+        plt.ylabel("Price")
+        plt.legend()
+        st.pyplot(plt)
+
     except Exception as e:
         st.error(f"Error during prediction: {e}")
 
-# Footer
+# Footer with Contact Information
 st.divider()
 st.markdown(
     """
@@ -98,13 +104,14 @@ st.markdown(
     """
 )
 st.divider()
-st.divider()
-st.divider()
 st.markdown(
     """
-    This Project is made by Kaushal Prajapati\n
-    Github profile : https://github.com/KaushalprajapatiKP\n
-    Linkdien : www.linkedin.com/in/kaushal-prajapati-110a2a212\n
-    Email : kaushalprajapati5296@gmail.com\n
-    """
+    <div style="text-align: center;">
+        <h4>Made by Kaushal Prajapati</h4>
+        <p>🌟 <a href="https://github.com/KaushalprajapatiKP" target="_blank">GitHub</a> | 
+        💼 <a href="www.linkedin.com/in/kaushal-prajapati-110a2a212" target="_blank">LinkedIn</a> | 
+        ✉️ <a href="mailto:kaushalprajapati5296@gmail.com">Email</a></p>
+    </div>
+    """,
+    unsafe_allow_html=True
 )
