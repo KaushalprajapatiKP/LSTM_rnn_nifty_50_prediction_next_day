@@ -7,6 +7,3 @@ matplotlib
 streamlit
 scikeras
 keras
-pickle
-ipython
-ipykernal
