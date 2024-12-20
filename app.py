@@ -73,11 +73,12 @@ if st.button("🚀 Predict Now"):
         col1.metric(label="Predicted Open", value=f"{prediction['Predicted_Open']:.2f}")
         col2.metric(label="Predicted Close", value=f"{prediction['Predicted_Close']:.2f}")
         percent_change = ((prediction['Predicted_Close'] - prediction['Predicted_Open']) / prediction['Predicted_Open']) * 100
-        color = "green" if percent_change > 0 else "red"
+        delta_color = "inverse" if percent_change < 0 else "normal"
+
         col3.metric(
             label="Predicted %Change",
             value=f"{percent_change:.2f}%",
-            delta_color='inverse'
+            delta_color=delta_color
         )
         
         # Historical Data Visualization
