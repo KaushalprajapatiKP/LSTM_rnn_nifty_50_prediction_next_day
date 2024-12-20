@@ -1,6 +1,6 @@
 #  Long Short-Term Memory Recurrent Neural Network for prediction of Nifty50 index from historical data
 
-# Stock Price Prediction Using LSTM
+## Stock Price Prediction Using LSTM
 
 This project aims to predict the next day's stock prices based on historical data from the Nifty 50 index using Long Short-Term Memory (LSTM) neural networks. The model is built using TensorFlow and Keras to predict stock prices, leveraging time-series data for training and testing.
 
