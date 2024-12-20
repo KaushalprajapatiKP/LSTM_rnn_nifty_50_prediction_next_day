@@ -96,4 +96,11 @@ st.markdown(
     **Note:** Predictions are based on historical data and a pre-trained model.  
     For more information, contact [support@example.com](mailto:support@example.com).
     """
+st.markdown(
+    """
+    This Project is made by Kaushal Prajapati
+    Github profile : https://github.com/KaushalprajapatiKP
+    Linkdien : www.linkedin.com/in/kaushal-prajapati-110a2a212
+    Email : kaushalprajapati5296@gmail.com
+    """
 )
